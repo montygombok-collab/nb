@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مجلة الكويمات الإخبارية - صوت القرية وأهلها</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- شريط التنقل -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <div class="logo-icon">📰</div>
+                <div class="logo-text">
+                    <h2>مجلة الكويمات</h2>
+                    <p>الإخبارية</p>
+                </div>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="#home" class="nav-link">الرئيسية</a></li>
+                <li class="nav-item"><a href="#news" class="nav-link">أخبار القرية</a></li>
+                <li class="nav-item"><a href="#events" class="nav-link">فعاليات</a></li>
+                <li class="nav-item"><a href="#services" class="nav-link">خدمات</a></li>
+                <li class="nav-item"><a href="#heritage" class="nav-link">تراث</a></li>
+                <li class="nav-item"><a href="#gallery" class="nav-link">معرض الصور</a></li>
+                <li class="nav-item"><a href="#contact" class="nav-link">اتصل بنا</a></li>
+            </ul>
+            
+            <div class="nav-actions">
+                <button class="subscribe-btn">اشترك في المجلة</button>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- القسم الرئيسي -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">مجلة الكويمات الإخبارية</h1>
+                <p class="hero-subtitle">الصوت الناطق لأهل القرية، والمرآة العاكسة لأخبارها وأحداثها</p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="number">150+</span>
+                        <span class="label">خبر محلي</span>
+                    </div>
+                    <div class="stat">
+                        <span class="number">50+</span>
+                        <span class="label">فعالية مجتمعية</span>
+                    </div>
+                    <div class="stat">
+                        <span class="number">1000+</span>
+                        <span class="label">قارئ نشط</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="breaking-news">
+                    <span class="breaking-badge">خبر عاجل</span>
+                    <h3>انطلاق مهرجان التمور السنوي في القرية</h3>
+                    <p>تحت رعاية مجلس القرية، ينطلق المهرجان يوم الجمعة القادم</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الأخبار -->
+    <section id="news" class="news-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">أخبار القرية</h2>
+                <p class="section-subtitle">آخر المستجدات والأحداث في قرية الكويمات</p>
+            </div>
+            
+            <div class="news-grid">
+                <!-- الخبر الرئيسي -->
+                <article class="news-card featured">
+                    <div class="news-image">
+                        <img src="images/news1.jpg" alt="مشروع تطوير البنية التحتية">
+                        <span class="news-category">تطوير</span>
+                    </div>
+                    <div class="news-content">
+                        <h3>انطلاق مشروع تطوير البنية التحتية في الكويمات</h3>
+                        <p class="news-excerpt">بدأت أعمال تطوير الطرق الرئيسية وشبكة الصرف الصحي في إطار خطة التطوير الشامل للقرية...</p>
+                        <div class="news-meta">
+                            <span class="news-date"><i class="far fa-calendar"></i> 15 ديسمبر 2024</span>
+                            <span class="news-author"><i class="far fa-user"></i> مراسل المجلة</span>
+                        </div>
+                        <a href="#" class="read-more">قراءة الخبر كاملاً <i class="fas fa-arrow-left"></i></a>
+                    </div>
+                </article>
+
+                <!-- أخبار ثانوية -->
+                <article class="news-card">
+                    <div class="news-image">
+                        <img src="images/news2.jpg" alt="مدارس القرية">
+                        <span class="news-category">تعليم</span>
+                    </div>
+                    <div class="news-content">
+                        <h3>مدارس الكويمات تحقق أعلى نسب نجاح في المحافظة</h3>
+                        <p class="news-excerpt">تفوق طلاب القرية في الامتحانات النهائية بنسبة 95%...</p>
+                        <div class="news-meta">
+                            <span class="news-date">10 ديسمبر 2024</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="news-card">
+                    <div class="news-image">
+                        <img src="images/news3.jpg" alt="الزراعة">
+                        <span class="news-category">زراعة</span>
+                    </div>
+                    <div class="news-content">
+                        <h3>موسم زراعي واعد لأشجار النخيل في القرية</h3>
+                        <p class="news-excerpt">توقع إنتاج قياسي للتمور هذا الموسم بفضل التحسينات في طرق الري...</p>
+                        <div class="news-meta">
+                            <span class="news-date">8 ديسمبر 2024</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="news-card">
+                    <div class="news-image">
+                        <img src="images/news4.jpg" alt="صحة">
+                        <span class="news-category">صحة</span>
+                    </div>
+                    <div class="news-content">
+                        <h3>افتتاح عيادة طبية متكاملة في المركز الصحي</h3>
+                        <p class="news-excerpt">مجهزة بأحدث الأجهزة الطبية لتخدم أهالي القرية والقرى المجاورة...</p>
+                        <div class="news-meta">
+                            <span class="news-date">5 ديسمبر 2024</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            
+            <div class="section-footer">
+                <a href="#" class="view-all-btn">عرض كل الأخبار <i class="fas fa-newspaper"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الفعاليات -->
+    <section id="events" class="events-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">فعاليات القرية</h2>
+                <p class="section-subtitle">أنشطة وفعاليات قادمة في الكويمات</p>
+            </div>
+            
+            <div class="events-timeline">
+                <div class="event-item">
+                    <div class="event-date">
+                        <span class="day">20</span>
+                        <span class="month">ديسمبر</span>
+                    </div>
+                    <div class="event-content">
+                        <h3>سوق القرية الأسبوعي</h3>
+                        <p>سوق للمنتجات المحلية واليدوية من الساعة 8 صباحاً حتى 2 ظهراً</p>
+                        <span class="event-location"><i class="fas fa-map-marker-alt"></i> الساحة الرئيسية</span>
+                    </div>
+                </div>
+                
+                <div class="event-item">
+                    <div class="event-date">
+                        <span class="day">25</span>
+                        <span class="month">ديسمبر</span>
+                    </div>
+                    <div class="event-content">
+                        <h3>احتفالية اليوم الوطني</h3>
+                        <p>فعاليات ثقافية وترفيهية بمناسبة اليوم الوطني للقرية</p>
+                        <span class="event-location"><i class="fas fa-map-marker-alt"></i> ملعب القرية</span>
+                    </div>
+                </div>
+                
+                <div class="event-item">
+                    <div class="event-date">
+                        <span class="day">30</span>
+                        <span class="month">ديسمبر</span>
+                    </div>
+                    <div class="event-content">
+                        <h3>مسابقة القرآن الكريم</h3>
+                        <p>المسابقة السنوية لحفظ وتلاوة القرآن الكريم لشباب القرية</p>
+                        <span class="event-location"><i class="fas fa-map-marker-alt"></i> المسجد الكبير</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الخدمات -->
+    <section id="services" class="services-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">خدمات القرية</h2>
+                <p class="section-subtitle">الخدمات المتاحة لأهالي الكويمات</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-clinic-medical"></i>
+                    </div>
+                    <h3>المركز الصحي</h3>
+                    <p>خدمات طبية متكاملة وطوارئ على مدار 24 ساعة</p>
+                    <span class="service-hours">مفتوح 24/7</span>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-school"></i>
+                    </div>
+                    <h3>المدارس</h3>
+                    <p>مدارس ابتدائية وإعدادية وثانوية للبنين والبنات</p>
+                    <span class="service-hours">7:00 ص - 2:00 م</span>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-hand-holding-usd"></i>
+                    </div>
+                    <h3>الجمعية التعاونية</h3>
+                    <p>تسويق المنتجات الزراعية والحيوانية لأهالي القرية</p>
+                    <span class="service-hours">8:00 ص - 4:00 م</span>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-mosque"></i>
+                    </div>
+                    <h3>المساجد</h3>
+                    <p>3 مساجد تخدم مختلف أحياء القرية</p>
+                    <span class="service-hours">أوقات الصلاة</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم التراث -->
+    <section id="heritage" class="heritage-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">تراث الكويمات</h2>
+                <p class="section-subtitle">إرث ثقافي وتاريخي يعبر عن هوية القرية</p>
+            </div>
+            
+            <div class="heritage-content">
+                <div class="heritage-text">
+                    <h3>قرية الكويمات: تاريخ عريق وحاضر مشرق</h3>
+                    <p>تعتبر الكويمات من القرى العريقة في المنطقة، تمتاز بتراث ثقافي غني وتاريخ حافل بالإنجازات. يعمل أهالي القرية على الحفاظ على تقاليدهم مع مواكبة متطلبات العصر.</p>
+                    
+                    <div class="heritage-features">
+                        <div class="heritage-feature">
+                            <i class="fas fa-history"></i>
+                            <span>تاريخ تأسيس القرية: 1800م</span>
+                        </div>
+                        <div class="heritage-feature">
+                            <i class="fas fa-users"></i>
+                            <span>عدد السكان: 5,000 نسمة</span>
+                        </div>
+                        <div class="heritage-feature">
+                            <i class="fas fa-tree"></i>
+                            <span>أشهر المنتجات: التمور والحبوب</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="heritage-images">
+                    <div class="heritage-image">
+                        <img src="images/heritage1.jpg" alt="التراث المعماري">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- معرض الصور -->
+    <section id="gallery" class="gallery-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">معرض الصور</h2>
+                <p class="section-subtitle">لحظات من حياة القرية في صور</p>
+            </div>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="images/gallery1.jpg" alt="مناظر طبيعية">
+                    <div class="gallery-caption">الطبيعة الخلابة حول القرية</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/gallery2.jpg" alt="الحياة اليومية">
+                    <div class="gallery-caption">الحياة اليومية في الكويمات</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/gallery3.jpg" alt="المنتجات المحلية">
+                    <div class="gallery-caption">المنتجات الزراعية المحلية</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/gallery4.jpg" alt="الفعاليات">
+                    <div class="gallery-caption">فعاليات مجتمعية</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- اتصل بنا -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">اتصل بنا</h2>
+                <p class="section-subtitle">نرحب بآرائكم ومقترحاتكم</p>
+            </div>
+            
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>معلومات التواصل</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <strong>العنوان:</strong>
+                            <p>قرية الكويمات، مركز أم روابة، ولاية شمال كردفان</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <strong>الهاتف:</strong>
+                            <p>+249 XXX XXX XXX</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <strong>البريد الإلكتروني:</strong>
+                            <p>info@alkoymat-news.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <strong>ساعات العمل:</strong>
+                            <p>الأحد - الخميس: 8:00 ص - 4:00 م</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <form class="contact-form">
+                    <h3>أرسل رسالة</h3>
+                    <div class="form-group">
+                        <input type="text" placeholder="اسمك الكريم" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="البريد الإلكتروني" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" placeholder="رقم الهاتف">
+                    </div>
+                    <div class="form-group">
+                        <select required>
+                            <option value="">اختر نوع الرسالة</option>
+                            <option value="news">مقترح خبر</option>
+                            <option value="suggestion">مقترح عام</option>
+                            <option value="complaint">شكوى</option>
+                            <option value="inquiry">استفسار</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <textarea placeholder="رسالتك..." rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i>
+                        إرسال الرسالة
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- الفوتر -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <h3>مجلة الكويمات الإخبارية</h3>
+                        <p>الصوت الأمين لأهل القرية منذ 1995</p>
+                    </div>
+                    <p class="footer-description">
+                        نعمل على تغطية أخبار القرية ونقل هموم أهلها والمساهمة في تنمية المجتمع المحلي.
+                    </p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>روابط سريعة</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home">الرئيسية</a></li>
+                        <li><a href="#news">أخبار القرية</a></li>
+                        <li><a href="#events">فعاليات</a></li>
+                        <li><a href="#services">خدمات</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>خدمات المجلة</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">الإعلانات</a></li>
+                        <li><a href="#">الاشتراكات</a></li>
+                        <li><a href="#">نشر الأخبار</a></li>
+                        <li><a href="#">الإعلانات الوظيفية</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>تابعونا</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                    </div>
+                    <div class="newsletter">
+                        <p>اشترك في نشرتنا الإخبارية</p>
+                        <div class="newsletter-form">
+                            <input type="email" placeholder="بريدك الإلكتروني">
+                            <button type="submit">اشترك</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 مجلة الكويمات الإخبارية. جميع الحقوق محفوظة.</p>
+                <p>تصميم وتطوير بأيدي أبناء القرية</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
