@@ -4,14 +4,194 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>مجلة الكويمات الإخبارية - صوت القرية وأهلها</title>
-    <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Changa:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #4CAF50; /* أخضر */
+            --secondary-color: #388E3C; /* أخضر داكن */
+            --text-color: #333;
+            --light-bg: #f5f5f5;
+            --white: #ffffff;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Changa', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            direction: rtl;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        /* شريط التنقل */
+        .navbar {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 5%;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            color: var(--primary-color);
+        }
+        
+        .nav-logo h2 {
+            margin: 0;
+            font-size: 1.5rem;
+            line-height: 1;
+        }
+        
+        .nav-logo p {
+            margin: 0;
+            font-size: 0.8rem;
+            color: var(--text-color);
+        }
+        
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-color);
+            padding: 15px 20px;
+            display: block;
+            transition: color 0.3s, background-color 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+        
+        /* الأقسام العامة */
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-top: 20px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+            border-bottom: 3px solid var(--primary-color);
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: #777;
+        }
+        
+        /* معرض الصور المُحسَّن */
+        .gallery-section {
+            background-color: var(--white);
+            padding: 60px 0;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 350px; /* توحيد ارتفاع الصور */
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            background: rgba(0, 0, 0, 0.6);
+            color: var(--white);
+            padding: 15px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-align: center;
+            transition: background 0.3s ease;
+        }
+        
+        .gallery-item:hover .gallery-caption {
+            background: rgba(76, 175, 80, 0.8);
+        }
+        
+        /* التجاوبية (Responsive Design) */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background-color: var(--white);
+                position: absolute;
+                top: 60px; /* افتراضي */
+                left: 0;
+                right: 0;
+                padding: 10px 0;
+            }
+            .nav-menu.active {
+                display: flex;
+            }
+            .nav-link {
+                padding: 10px 20px;
+                border-bottom: 1px solid #eee;
+            }
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- شريط التنقل -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
@@ -43,7 +223,6 @@
         </div>
     </nav>
 
-    <!-- القسم الرئيسي -->
     <section id="home" class="hero">
         <div class="hero-content">
             <div class="hero-text">
@@ -74,7 +253,6 @@
         </div>
     </section>
 
-    <!-- قسم الأخبار -->
     <section id="news" class="news-section">
         <div class="container">
             <div class="section-header">
@@ -83,7 +261,6 @@
             </div>
             
             <div class="news-grid">
-                <!-- الخبر الرئيسي -->
                 <article class="news-card featured">
                     <div class="news-image">
                         <img src="images/news1.jpg" alt="مشروع تطوير البنية التحتية">
@@ -100,7 +277,6 @@
                     </div>
                 </article>
 
-                <!-- أخبار ثانوية -->
                 <article class="news-card">
                     <div class="news-image">
                         <img src="images/news2.jpg" alt="مدارس القرية">
@@ -150,7 +326,6 @@
         </div>
     </section>
 
-    <!-- قسم الفعاليات -->
     <section id="events" class="events-section">
         <div class="container">
             <div class="section-header">
@@ -198,7 +373,6 @@
         </div>
     </section>
 
-    <!-- قسم الخدمات -->
     <section id="services" class="services-section">
         <div class="container">
             <div class="section-header">
@@ -246,7 +420,6 @@
         </div>
     </section>
 
-    <!-- قسم التراث -->
     <section id="heritage" class="heritage-section">
         <div class="container">
             <div class="section-header">
@@ -284,19 +457,31 @@
         </div>
     </section>
 
-    <!-- معرض الصور -->
     <section id="gallery" class="gallery-section">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">معرض الصور</h2>
-                <p class="section-subtitle">لحظات من حياة القرية في صور</p>
+                <h2 class="section-title">🖼️ معرض صور الكويمات المُحدَّث</h2>
+                <p class="section-subtitle">مناظر طبيعية، حياة القرية، والتراث الأصيل</p>
             </div>
             
             <div class="gallery-grid">
                 <div class="gallery-item">
-                    <img src="https://www.google.com/imgres?q=%D9%82%D8%B1%D9%8A%D8%A9%20%D8%A7%D9%84%D9%83%D9%88%D9%8A%D9%85%D8%A7%D8%AA%20&imgurl=https%3A%2F%2Flookaside.fbsbx.com%2Flookaside%2Fcrawler%2Fmedia%2F%3Fmedia_id%3D2632281433601434&imgrefurl=https%3A%2F%2Fwww.facebook.com%2Fphoto.php%3Ffbid%3D2632281433601434%26id%3D983924358437158%26set%3Da.984862371676690&docid=-mFlPFrmpKNgGM&tbnid=yfcs_5KtX4cpIM&vet=12ahUKEwjDxJmekcWQAxUJ87sIHXNoIQQQM3oECBoQAA..i&w=720&h=483&hcb=2&ved=2ahUKEwjDxJmekcWQAxUJ87sIHXNoIQQQM3oECBoQAA" alt="مناظر طبيعية">
-                    <div class="gallery-caption">الطبيعة الخلابة حول القرية</div>
+                    <img src="http://googleusercontent.com/image_generation_content/0" alt="منظر بانورامي لقرية الكويمات بشمال كردفان">
+                    <div class="gallery-caption">منظر بانورامي لقرية الكويمات (صورة تمثيلية)</div>
                 </div>
+                <div class="gallery-item">
+                    <img src="https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=122225525330033939" alt="مشاهد من منطقة الكويمات بشمال كردفان">
+                    <div class="gallery-caption">مشاهد من منطقة الكويمات بولاية شمال كردفان</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=2632281433601434" alt="صورة من فيسبوك للطبيعة">
+                    <div class="gallery-caption">لقطة جوية للطبيعة الخلابة</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=464396449442778" alt="صورة عامة للقرية شمال كردفان">
+                    <div class="gallery-caption">لقطة عامة للقرية والحقول في شمال كردفان</div>
+                </div>
+                
                 <div class="gallery-item">
                     <img src="images/gallery2.jpg" alt="الحياة اليومية">
                     <div class="gallery-caption">الحياة اليومية في الكويمات</div>
@@ -305,15 +490,10 @@
                     <img src="images/gallery3.jpg" alt="المنتجات المحلية">
                     <div class="gallery-caption">المنتجات الزراعية المحلية</div>
                 </div>
-                <div class="gallery-item">
-                    <img src="images/gallery4.jpg" alt="الفعاليات">
-                    <div class="gallery-caption">فعاليات مجتمعية</div>
-                </div>
             </div>
         </div>
     </section>
 
-    <!-- اتصل بنا -->
     <section id="contact" class="contact-section">
         <div class="container">
             <div class="section-header">
@@ -386,7 +566,6 @@
         </div>
     </section>
 
-    <!-- الفوتر -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
