@@ -17,15 +17,18 @@
             --light-bg: #f5f5f5;
             --white: #ffffff;
             --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --header-font: 'Changa', sans-serif;
+            --body-font: 'Changa', sans-serif;
         }
 
         body {
-            font-family: 'Changa', sans-serif;
+            font-family: var(--body-font);
             margin: 0;
             padding: 0;
             background-color: var(--light-bg);
             color: var(--text-color);
             direction: rtl;
+            line-height: 1.6;
         }
 
         .container {
@@ -34,7 +37,7 @@
             margin: 0 auto;
             padding: 20px 0;
         }
-
+        
         /* شريط التنقل */
         .navbar {
             background-color: var(--white);
@@ -61,6 +64,7 @@
             margin: 0;
             font-size: 1.5rem;
             line-height: 1;
+            font-family: var(--header-font);
         }
         
         .nav-logo p {
@@ -87,9 +91,14 @@
 
         .nav-link:hover {
             color: var(--primary-color);
+            background-color: #f0f0f0;
         }
         
         /* الأقسام العامة */
+        section {
+            padding: 60px 0;
+        }
+
         .section-header {
             text-align: center;
             margin-bottom: 40px;
@@ -103,11 +112,18 @@
             border-bottom: 3px solid var(--primary-color);
             display: inline-block;
             padding-bottom: 5px;
+            font-family: var(--header-font);
         }
 
         .section-subtitle {
             font-size: 1.1rem;
             color: #777;
+        }
+
+        /* Hero Section Styling (للتوضيح فقط، الأنماط الأصلية قد تكون في style.css) */
+        .hero {
+            background-color: #e8f5e9;
+            padding: 80px 0;
         }
         
         /* معرض الصور المُحسَّن */
@@ -137,7 +153,7 @@
         
         .gallery-item img {
             width: 100%;
-            height: 350px; /* توحيد ارتفاع الصور */
+            height: 250px; /* توحيد ارتفاع الصور */
             object-fit: cover;
             display: block;
             transition: transform 0.5s ease;
@@ -154,9 +170,9 @@
             left: 0;
             background: rgba(0, 0, 0, 0.6);
             color: var(--white);
-            padding: 15px;
-            font-size: 1rem;
-            font-weight: 600;
+            padding: 10px;
+            font-size: 0.9rem;
+            font-weight: 500;
             text-align: center;
             transition: background 0.3s ease;
         }
@@ -165,32 +181,32 @@
             background: rgba(76, 175, 80, 0.8);
         }
         
+        /* Footer Styling (للتوضيح فقط، الأنماط الأصلية قد تكون في style.css) */
+        .footer {
+            background-color: #333;
+            color: #ccc;
+            padding: 40px 0 10px;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            margin-top: 20px;
+        }
+
         /* التجاوبية (Responsive Design) */
         @media (max-width: 768px) {
             .nav-menu {
-                display: none;
-                flex-direction: column;
-                width: 100%;
-                background-color: var(--white);
-                position: absolute;
-                top: 60px; /* افتراضي */
-                left: 0;
-                right: 0;
-                padding: 10px 0;
-            }
-            .nav-menu.active {
-                display: flex;
-            }
-            .nav-link {
-                padding: 10px 20px;
-                border-bottom: 1px solid #eee;
+                /* افتراض أن الـ CSS الأصلي يدعم قائمة الهمبرغر */
+                display: none; 
             }
             .gallery-grid {
                 grid-template-columns: 1fr;
             }
         }
     </style>
-</head>
+    </head>
 <body>
     <nav class="navbar">
         <div class="nav-container">
@@ -224,30 +240,32 @@
     </nav>
 
     <section id="home" class="hero">
-        <div class="hero-content">
-            <div class="hero-text">
-                <h1 class="hero-title">مجلة الكويمات الإخبارية</h1>
-                <p class="hero-subtitle">الصوت الناطق لأهل القرية، والمرآة العاكسة لأخبارها وأحداثها</p>
-                <div class="hero-stats">
-                    <div class="stat">
-                        <span class="number">150+</span>
-                        <span class="label">خبر محلي</span>
-                    </div>
-                    <div class="stat">
-                        <span class="number">50+</span>
-                        <span class="label">فعالية مجتمعية</span>
-                    </div>
-                    <div class="stat">
-                        <span class="number">1000+</span>
-                        <span class="label">قارئ نشط</span>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">مجلة الكويمات الإخبارية</h1>
+                    <p class="hero-subtitle">الصوت الناطق لأهل القرية، والمرآة العاكسة لأخبارها وأحداثها</p>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <span class="number">150+</span>
+                            <span class="label">خبر محلي</span>
+                        </div>
+                        <div class="stat">
+                            <span class="number">50+</span>
+                            <span class="label">فعالية مجتمعية</span>
+                        </div>
+                        <div class="stat">
+                            <span class="number">1000+</span>
+                            <span class="label">قارئ نشط</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="hero-image">
-                <div class="breaking-news">
-                    <span class="breaking-badge">خبر عاجل</span>
-                    <h3> دخول مليشا الدعم السريع الى محليه ام دم حاج احمد </h3>
-                    <p> اللهم احفظ اهلنا في الكويمات </p>م</p>
+                <div class="hero-image">
+                    <div class="breaking-news">
+                        <span class="breaking-badge">خبر عاجل</span>
+                        <h3> دخول مليشا الدعم السريع الى محليه ام دم حاج احمد </h3>
+                        <p> اللهم احفظ اهلنا في الكويمات </p>م</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -467,7 +485,7 @@
             <div class="gallery-grid">
                 <div class="gallery-item">
                     <img src="http://googleusercontent.com/image_generation_content/0" alt="منظر بانورامي لقرية الكويمات بشمال كردفان">
-                    <div class="gallery-caption">منظر بانورامي لقرية الكويمات (صورة تمثيلية)</div>
+                    <div class="gallery-caption">منظر بانورامي لقرية الكويمات (صورة مولدة)</div>
                 </div>
                 <div class="gallery-item">
                     <img src="https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=122225525330033939" alt="مشاهد من منطقة الكويمات بشمال كردفان">
@@ -475,7 +493,7 @@
                 </div>
                 <div class="gallery-item">
                     <img src="https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=2632281433601434" alt="صورة من فيسبوك للطبيعة">
-                    <div class="gallery-caption">لقطة جوية للطبيعة الخلابة</div>
+                    <div class="gallery-caption">لقطة من الطبيعة الخلابة</div>
                 </div>
                 <div class="gallery-item">
                     <img src="https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=464396449442778" alt="صورة عامة للقرية شمال كردفان">
