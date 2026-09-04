@@ -3,67 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crew - إدارة المهام الجماعية</title>
+    <title>منصة Crew لإدارة المهام</title>
     <style>
         :root {
-            --bg: #f8fafc;
+            --bg-color: #f1f5f9;
             --card-bg: #ffffff;
-            --text: #1e293b;
-            --border: #e2e8f0;
+            --text-color: #0f172a;
+            --border-color: #cbd5e1;
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --danger: #dc2626;
+            --success: #16a34a;
+        }
+
+        body.dark {
+            --bg-color: #020617;
+            --card-bg: #0f172a;
+            --text-color: #f8fafc;
+            --border-color: #1e293b;
             --primary: #3b82f6;
             --primary-hover: #2563eb;
         }
 
-        body.dark-mode {
-            --bg: #0f172a;
-            --card-bg: #1e293b;
-            --text: #f8fafc;
-            --border: #334155;
-            --primary: #60a5fa;
-            --primary-hover: #3b82f6;
-        }
-
         body {
-            background-color: var(--bg);
-            color: var(--text);
+            background-color: var(--bg-color);
+            color: var(--text-color);
             font-family: system-ui, -apple-system, sans-serif;
             margin: 0;
             padding: 0;
-            transition: background 0.2s, color 0.2s;
+            transition: background 0.3s, color 0.3s;
         }
 
-        .header {
+        header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 30px;
+            padding: 15px 25px;
             background: var(--card-bg);
-            border-bottom: 1px solid var(--border);
+            border-bottom: 1px solid var(--border-color);
         }
 
-        .container {
-            max-width: 600px;
-            margin: 40px auto;
+        .wrap {
+            max-width: 650px;
+            margin: 30px auto;
             padding: 0 15px;
         }
 
-        .card {
+        .box {
             background: var(--card-bg);
-            border: 1px solid var(--border);
-            padding: 24px;
+            border: 1px solid var(--border-color);
+            padding: 20px;
             border-radius: 12px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
             margin-bottom: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
         }
 
         input, textarea {
             width: 100%;
-            padding: 10px 12px;
-            margin: 8px 0;
-            border: 1px solid var(--border);
+            padding: 10px 14px;
+            margin: 6px 0 12px 0;
+            border: 1px solid var(--border-color);
             border-radius: 8px;
             background: var(--card-bg);
-            color: var(--text);
+            color: var(--text-color);
             box-sizing: border-box;
             font-size: 14px;
         }
@@ -73,186 +75,110 @@
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            font-weight: 500;
+            font-weight: 600;
             font-size: 14px;
+            transition: background 0.2s;
         }
 
-        .btn-primary { background: var(--primary); color: white; width: 100%; margin-top: 8px; }
-        .btn-primary:hover { background: var(--primary-hover); }
+        .btn-main { background: var(--primary); color: #fff; width: 100%; }
+        .btn-main:hover { background: var(--primary-hover); }
 
-        .btn-danger { background: #ef4444; color: white; padding: 5px 10px; font-size: 12px; }
-        .btn-text { background: transparent; color: var(--text); border: 1px solid var(--border); }
-        
-        .btn-google {
-            background: var(--card-bg);
-            color: var(--text);
-            border: 1px solid var(--border);
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 12px;
-        }
-        .btn-google:hover { background: var(--bg); }
-
-        .auth-divider {
-            text-align: center;
-            border-bottom: 1px solid var(--border);
-            line-height: 0.1em;
-            margin: 20px 0 15px 0;
-            font-size: 12px;
-            color: #888;
-        }
-        .auth-divider span {
-            background: var(--card-bg);
-            padding: 0 10px;
-        }
+        .btn-sec { background: var(--success); color: #fff; padding: 6px 12px; font-size: 12px; }
+        .btn-del { background: var(--danger); color: #fff; padding: 6px 12px; font-size: 12px; }
+        .btn-ghost { background: transparent; border: 1px solid var(--border-color); color: var(--text-color); }
 
         .row { display: flex; gap: 8px; }
         .row input { margin: 0; }
-        .row button { width: auto; margin: 0; }
 
-        .divider { border: 0; border-top: 1px solid var(--border); margin: 20px 0; }
-        .hidden { display: none; }
-
-        .list { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
-        .group-item {
+        .list-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 14px;
-            background: var(--bg);
-            border: 1px solid var(--border);
+            padding: 10px 12px;
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
             border-radius: 8px;
+            margin-bottom: 8px;
         }
 
-        .tasks-list { list-style: none; padding: 0; margin-top: 15px; }
-        .task-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .modal {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 100;
-        }
-        .modal-content {
-            width: 90%;
-            max-width: 400px;
-        }
-        .requests-box {
-            background: var(--bg);
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px solid var(--border);
-            margin-bottom: 15px;
-        }
-        .request-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 6px 0;
-            border-bottom: 1px solid var(--border);
-            font-size: 14px;
-        }
-        .btn-success { background: #10b981; color: white; padding: 6px 12px; font-size: 12px; border: none; border-radius: 6px; cursor: pointer; }
+        .hidden { display: none !important; }
+        .hr { border: 0; border-top: 1px solid var(--border-color); margin: 20px 0; }
     </style>
 </head>
 <body>
 
-    <header class="header">
-        <h1>Crew</h1>
+    <header>
+        <h2 style="margin:0;">Crew</h2>
         <div>
-            <button id="themeToggle" class="btn-text">🌙 الوضع</button>
-            <span id="userDisplay" style="margin-right: 10px; font-size: 14px;"></span>
-            <button id="logoutBtn" class="btn-danger hidden" style="padding: 4px 8px; font-size: 12px; margin-right: 5px;">خروج</button>
+            <button id="themeBtn" class="btn-ghost" style="padding: 6px 10px; font-size: 12px;">🌙 المظهر</button>
+            <span id="userEmail" style="font-size: 13px; margin: 0 10px;"></span>
+            <button id="logoutBtn" class="btn-del hidden" style="padding: 6px 10px;">خروج</button>
         </div>
     </header>
 
-    <main class="container">
+    <div class="wrap">
         
-        <!-- شاشة تسجيل الدخول -->
-        <section id="authSection" class="card">
-            <h2>تسجيل الدخول</h2>
-            <button id="googleLoginBtn" class="btn-google">
-                <svg width="18" height="18" viewBox="0 0 24 24" style="vertical-align: middle;"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.13 0-5.78-2.11-6.73-4.96H1.18v3.15C3.17 21.34 7.23 24 12 24z"/><path fill="#FBBC05" d="M5.27 14.24c-.25-.72-.38-1.49-.38-2.24s.13-1.52.38-2.24V6.6H1.18C.43 8.13 0 9.87 0 12s.43 3.87 1.18 5.4l4.09-3.16z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.23 0 3.17 2.66 1.18 6.6l4.09 3.15c.95-2.85 3.6-4.96 6.73-4.96z"/></svg>
-                التسجيل بواسطة Google
-            </button>
-            <div class="auth-divider"><span>أو بالبريد وكلمة المرور</span></div>
-            <input type="email" id="emailInput" placeholder="البريد الإلكتروني...">
-            <input type="password" id="passInput" placeholder="كلمة المرور...">
-            <button id="emailLoginBtn" class="btn-primary">دخول / إنشاء حساب</button>
-        </section>
+        <!-- قسم الدخول -->
+        <div id="authBox" class="box">
+            <h3>تسجيل الدخول / إنشاء حساب</h3>
+            <input type="email" id="email" placeholder="البريد الإلكتروني">
+            <input type="password" id="password" placeholder="كلمة المرور">
+            <button id="authBtn" class="btn-main">دخول</button>
+        </div>
 
-        <!-- لوحة التحكم الرئيسية -->
-        <section id="appSection" class="card hidden">
+        <!-- التطبيق الرئيسي -->
+        <div id="appBox" class="box hidden">
+            <button id="openCreateBtn" class="btn-main">➕ إنشاء مجموعة جديدة</button>
             
-            <button id="openCreateModalBtn" class="btn-primary">➕ إنشاء مجموعة جديدة</button>
+            <hr class="hr">
+            <h3>مجموعاتك المشارك بها</h3>
+            <div id="myGroupsList">جاري التحميل...</div>
 
-            <hr class="divider">
+            <hr class="hr">
+            <h3>المجموعات العامة المتاحة</h3>
+            <div id="allGroupsList">جاري التحميل...</div>
+        </div>
 
-            <h3>مجموعاتي</h3>
-            <div id="groupsList" class="list"></div>
+        <!-- شاشة تفاصيل المجموعة المحددة -->
+        <div id="groupViewBox" class="box hidden">
+            <button id="backBtn" class="btn-ghost" style="margin-bottom: 10px;">⬅ العودة للقائمة</button>
+            <h2 id="groupTitle" style="margin-top: 0;"></h2>
 
-            <hr class="divider">
-
-            <h3>المجموعات المتاحة للانضمام</h3>
-            <div id="allGroupsList" class="list"></div>
-
-            <div id="activeGroupContainer" class="hidden">
-                <hr class="divider">
-                <div class="group-info-header">
-                    <h3 id="activeGroupTitle">اسم المجموعة</h3>
-                </div>
-
-                <div id="requestsSection" class="hidden requests-box">
-                    <h4>طلبات الانضمام المعلقة</h4>
-                    <div id="requestsList"></div>
-                </div>
-
-                <div class="notes-box">
-                    <h4>ملاحظات عامة</h4>
-                    <textarea id="groupNotes" placeholder="اكتب ملاحظات الجروب هنا..."></textarea>
-                </div>
-
-                <div class="row" style="margin-top: 15px;">
-                    <input type="text" id="taskTitle" placeholder="اسم المهمة...">
-                    <input type="text" id="taskAssignee" placeholder="مسندة إلى...">
-                    <button id="addTaskBtn" class="btn-primary">إضافة مهمة</button>
-                </div>
-
-                <ul id="tasksList" class="tasks-list"></ul>
+            <div id="adminPanel" class="hidden" style="background: var(--bg-color); padding: 10px; border-radius: 8px; margin-bottom: 15px;">
+                <h4 style="margin: 0 0 8px 0;">طلبات الانضمام المعلقة:</h4>
+                <div id="requestsList">لا توجد طلبات</div>
             </div>
 
-        </section>
-    </main>
+            <h4>ملاحظات المجموعة</h4>
+            <textarea id="groupNotes" placeholder="اكتب ملاحظات المجموعة هنا..."></textarea>
 
-    <!-- مودال إنشاء مجموعة -->
-    <div id="createModal" class="modal hidden">
-        <div class="modal-content card">
-            <h3>إنشاء مجموعة جديدة</h3>
-            <input type="text" id="newGroupName" placeholder="اسم المجموعة...">
-            <div class="row" style="margin-top: 10px;">
-                <button id="confirmCreateBtn" class="btn-primary">تأكيد الإنشاء</button>
-                <button id="closeCreateModalBtn" class="btn-danger">إلغاء</button>
+            <hr class="hr">
+            <h4>إدارة المهام</h4>
+            <div class="row">
+                <input type="text" id="taskTitle" placeholder="اسم المهمة">
+                <input type="text" id="taskAssignee" placeholder="المسؤول عنها">
+                <button id="addTaskBtn" class="btn-main" style="width: auto;">إضافة</button>
             </div>
+            <div id="tasksList" style="margin-top: 10px;"></div>
+        </div>
+
+    </div>
+
+    <!-- نافذة إنشاء مجموعة -->
+    <div id="createModal" class="box hidden" style="position: fixed; top: 20%; left: 50%; transform: translateX(-50%); width: 90%; max-width: 400px; z-index: 99; box-shadow: 0 10px 25px rgba(0,0,0,0.2);">
+        <h3>إنشاء مجموعة جديدة</h3>
+        <input type="text" id="newGroupName" placeholder="اسم المجموعة">
+        <div class="row">
+            <button id="confirmCreateBtn" class="btn-main">إنشاء</button>
+            <button id="cancelCreateBtn" class="btn-ghost">إلغاء</button>
         </div>
     </div>
 
-    <!-- كود المنطق وربط Firebase -->
+    <!-- كود فايربيس والمنطق البرمجي -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-        import { getFirestore, collection, getDocs, doc, updateDoc, getDoc, addDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getFirestore, collection, getDocs, doc, setDoc, updateDoc, getDoc, addDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyBMM9yXT-LJfWPTv0AD2iD2rC2rnenYYik",
@@ -267,43 +193,40 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
-        const googleProvider = new GoogleAuthProvider();
 
-        let currentUser = null;
-        let activeGroupId = null;
+        let user = null;
+        let currentGroupId = null;
         let currentGroupData = null;
 
-        onAuthStateChanged(auth, (user) => {
+        // مراقبة حالة تسجيل الدخول
+        onAuthStateChanged(auth, (u) => {
+            user = u;
             if (user) {
-                currentUser = user;
-                document.getElementById('authSection').classList.add('hidden');
-                document.getElementById('appSection').classList.remove('hidden');
-                document.getElementById('userDisplay').innerText = user.displayName || user.email;
+                document.getElementById('authBox').classList.add('hidden');
+                document.getElementById('appBox').classList.remove('hidden');
                 document.getElementById('logoutBtn').classList.remove('hidden');
-                loadGroups();
+                document.getElementById('userEmail').innerText = user.email;
+                fetchGroups();
             } else {
-                currentUser = null;
-                document.getElementById('authSection').classList.remove('hidden');
-                document.getElementById('appSection').classList.add('hidden');
+                document.getElementById('authBox').classList.remove('hidden');
+                document.getElementById('appBox').classList.add('hidden');
+                document.getElementById('groupViewBox').classList.add('hidden');
                 document.getElementById('logoutBtn').classList.add('hidden');
-                document.getElementById('activeGroupContainer').classList.add('hidden');
+                document.getElementById('userEmail').innerText = '';
             }
         });
 
-        document.getElementById('googleLoginBtn').addEventListener('click', async () => {
-            try { await signInWithPopup(auth, googleProvider); } catch(e) { alert('خطأ في تسجيل الدخول عبر Google'); }
-        });
-
-        document.getElementById('emailLoginBtn').addEventListener('click', async () => {
-            const email = document.getElementById('emailInput').value.trim();
-            const pass = document.getElementById('passInput').value.trim();
-            if(!email || !pass) return alert('الرجاء إدخال البريد وكلمة المرور');
-            try { 
-                await signInWithEmailAndPassword(auth, email, pass); 
-            } catch { 
+        // تسجيل الدخول أو إنشاء حساب تلقائياً
+        document.getElementById('authBtn').addEventListener('click', async () => {
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+            if (!email || !password) return alert('الرجاء إدخال البريد وكلمة المرور');
+            try {
+                await signInWithEmailAndPassword(auth, email, password);
+            } catch {
                 try {
-                    await createUserWithEmailAndPassword(auth, email, pass);
-                } catch(err) {
+                    await createUserWithEmailAndPassword(auth, email, password);
+                } catch (err) {
                     alert('خطأ: ' + err.message);
                 }
             }
@@ -311,245 +234,217 @@
 
         document.getElementById('logoutBtn').addEventListener('click', () => signOut(auth));
 
-        document.getElementById('openCreateModalBtn').addEventListener('click', () => {
-            document.getElementById('createModal').classList.remove('hidden');
-        });
+        // فتح وإغلاق نافذة الإنشاء
+        document.getElementById('openCreateBtn').addEventListener('click', () => document.getElementById('createModal').classList.remove('hidden'));
+        document.getElementById('cancelCreateBtn').addEventListener('click', () => document.getElementById('createModal').classList.add('hidden'));
 
-        document.getElementById('closeCreateModalBtn').addEventListener('click', () => {
-            document.getElementById('createModal').classList.add('hidden');
-            document.getElementById('newGroupName').value = '';
-        });
-
+        // تأكيد إنشاء المجموعة
         document.getElementById('confirmCreateBtn').addEventListener('click', async () => {
             const name = document.getElementById('newGroupName').value.trim();
-            if(!name) return alert('الرجاء إدخال اسم المجموعة');
-
+            if (!name) return alert('أدخل اسم المجموعة');
             try {
                 await addDoc(collection(db, "groups"), {
-                    name,
-                    owner: currentUser.uid,
-                    members: [currentUser.uid],
+                    name: name,
+                    owner: user.uid,
+                    members: [user.uid],
                     requests: [],
-                    notes: '',
+                    notes: "",
                     tasks: []
                 });
-                document.getElementById('createModal').classList.add('hidden');
                 document.getElementById('newGroupName').value = '';
-                loadGroups();
-            } catch(e) {
-                alert('خطأ أثناء الإنشاء');
+                document.getElementById('createModal').classList.add('hidden');
+                fetchGroups();
+            } catch (e) {
+                alert('فشل الإنشاء');
             }
         });
 
-        async function loadGroups() {
-            const myList = document.getElementById('groupsList');
-            const allList = document.getElementById('allGroupsList');
-            myList.innerHTML = 'جاري التحميل...';
-            allList.innerHTML = 'جاري التحميل...';
+        // جلب وتحديث قوائم المجموعات
+        async function fetchGroups() {
+            const myContainer = document.getElementById('myGroupsList');
+            const allContainer = document.getElementById('allGroupsList');
+            myContainer.innerHTML = 'جاري التحميل...';
+            allContainer.innerHTML = 'جاري التحميل...';
 
             try {
-                const querySnapshot = await getDocs(collection(db, "groups"));
-                myList.innerHTML = '';
-                allList.innerHTML = '';
-                let hasMyGroups = false;
-                let hasOtherGroups = false;
+                const snapshot = await getDocs(collection(db, "groups"));
+                myContainer.innerHTML = '';
+                allContainer.innerHTML = '';
+                let hasMine = false;
+                let hasOthers = false;
 
-                querySnapshot.forEach((docSnap) => {
-                    const g = docSnap.data();
+                snapshot.forEach((docSnap) => {
+                    const data = docSnap.data();
                     const id = docSnap.id;
-                    const members = g.members || [];
-                    const requests = g.requests || [];
+                    const members = data.members || [];
+                    const requests = data.requests || [];
 
-                    if (members.includes(currentUser.uid)) {
-                        hasMyGroups = true;
-                        const item = document.createElement('div');
-                        item.className = 'group-item';
-                        item.innerHTML = `<span>📁 ${g.name}</span>`;
-                        const btn = document.createElement('button');
-                        btn.className = 'btn-success';
-                        btn.innerText = 'فتح';
-                        btn.addEventListener('click', () => selectGroup(id));
-                        item.appendChild(btn);
-                        myList.appendChild(item);
+                    if (members.includes(user.uid)) {
+                        hasMine = true;
+                        myContainer.innerHTML += `
+                            <div class="list-item">
+                                <span>📁 ${data.name}</span>
+                                <button class="btn-sec" onclick="openGroup('${id}')">فتح</button>
+                            </div>`;
                     } else {
-                        hasOtherGroups = true;
-                        const item = document.createElement('div');
-                        item.className = 'group-item';
-                        item.innerHTML = `<span>📁 ${g.name}</span>`;
-                        
-                        const alreadyRequested = requests.some(r => r.uid === currentUser.uid);
-                        const btn = document.createElement('button');
-                        if (alreadyRequested) {
-                            btn.className = 'btn-text';
-                            btn.innerText = 'بانتظار الموافقة';
-                            btn.disabled = true;
-                        } else {
-                            btn.className = 'btn-success';
-                            btn.innerText = 'طلب انضمام';
-                            btn.addEventListener('click', () => requestToJoin(id, g));
-                        }
-                        item.appendChild(btn);
-                        allList.appendChild(item);
+                        hasOthers = true;
+                        const requested = requests.some(r => r.uid === user.uid);
+                        allContainer.innerHTML += `
+                            <div class="list-item">
+                                <span>📁 ${data.name}</span>
+                                ${requested ? '<span style="font-size:12px; color:gray;">بانتظار الموافقة</span>' : `<button class="btn-sec" onclick="sendJoinRequest('${id}')">طلب انضمام</button>`}
+                            </div>`;
                     }
                 });
 
-                if(!hasMyGroups) {
-                    myList.innerHTML = '<p style="font-size:13px; color:#888;">ليس لديك أي مجموعات حالياً.</p>';
-                }
-                if(!hasOtherGroups) {
-                    allList.innerHTML = '<p style="font-size:13px; color:#888;">لا توجد مجموعات أخرى متاحة.</p>';
-                }
-            } catch(e) {
-                myList.innerHTML = 'فشل التحميل';
-                allList.innerHTML = 'فشل التحميل';
+                if (!hasMine) myContainer.innerHTML = '<p style="font-size:13px; color:gray;">ليس لديك مجموعات.</p>';
+                if (!hasOthers) allContainer.innerHTML = '<p style="font-size:13px; color:gray;">لا توجد مجموعات أخرى.</p>';
+            } catch (e) {
+                myContainer.innerHTML = 'خطأ في التحميل';
+                allContainer.innerHTML = 'خطأ في التحميل';
             }
         }
 
-        async function requestToJoin(groupId, groupData) {
+        window.sendJoinRequest = async function(id) {
             try {
-                let requests = groupData.requests || [];
-                if(requests.some(r => r.uid === currentUser.uid)) return;
-
-                requests.push({ uid: currentUser.uid, email: currentUser.email || currentUser.displayName || 'مستخدم' });
-                await updateDoc(doc(db, "groups", groupId), { requests });
-                alert('تم إرسال طلب الانضمام بنجاح');
-                loadGroups();
-            } catch(e) {
-                alert('حدث خطأ أثناء إرسال الطلب');
+                const ref = doc(db, "groups", id);
+                const snap = await getDoc(ref);
+                const data = snap.data();
+                let requests = data.requests || [];
+                if (!requests.some(r => r.uid === user.uid)) {
+                    requests.push({ uid: user.uid, email: user.email });
+                    await updateDoc(ref, { requests });
+                    alert('تم إرسال الطلب بنجاح');
+                    fetchGroups();
+                }
+            } catch (e) {
+                alert('فشل إرسال الطلب');
             }
         }
 
-        async function selectGroup(id) {
-            activeGroupId = id;
+        window.openGroup = async function(id) {
+            currentGroupId = id;
             try {
-                const docRef = doc(db, "groups", id);
-                const docSnap = await getDoc(docRef);
-                if(docSnap.exists()) {
-                    currentGroupData = docSnap.data();
-                    document.getElementById('activeGroupContainer').classList.remove('hidden');
-                    document.getElementById('activeGroupTitle').innerText = `المجموعة: ${currentGroupData.name}`;
+                const snap = await getDoc(doc(db, "groups", id));
+                if (snap.exists()) {
+                    currentGroupData = snap.data();
+                    document.getElementById('appBox').classList.add('hidden');
+                    document.getElementById('groupViewBox').classList.remove('hidden');
+                    document.getElementById('groupTitle').innerText = currentGroupData.name;
                     document.getElementById('groupNotes').value = currentGroupData.notes || '';
-                    
-                    if(currentGroupData.owner === currentUser.uid) {
-                        document.getElementById('requestsSection').classList.remove('hidden');
+
+                    // عرض لوحة المدير إذا كان هو صاحب المجموعة
+                    if (currentGroupData.owner === user.uid) {
+                        document.getElementById('adminPanel').classList.remove('hidden');
                         renderRequests();
                     } else {
-                        document.getElementById('requestsSection').classList.add('hidden');
+                        document.getElementById('adminPanel').classList.add('hidden');
                     }
                     renderTasks();
                 }
-            } catch(e) {
-                alert('خطأ في تحميل تفاصيل المجموعة');
+            } catch (e) {
+                alert('خطأ في فتح المجموعة');
             }
         }
 
+        document.getElementById('backBtn').addEventListener('click', () => {
+            document.getElementById('groupViewBox').classList.add('hidden');
+            document.getElementById('appBox').classList.remove('hidden');
+            fetchGroups();
+        });
+
         function renderRequests() {
-            const rList = document.getElementById('requestsList');
-            rList.innerHTML = '';
-            const requests = currentGroupData.requests || [];
-            if(requests.length === 0) {
-                rList.innerHTML = '<p style="font-size:13px; color:#888;">لا توجد طلبات معلقة</p>';
+            const list = document.getElementById('requestsList');
+            const reqs = currentGroupData.requests || [];
+            if (reqs.length === 0) {
+                list.innerHTML = '<span style="font-size:12px; color:gray;">لا توجد طلبات معلقة</span>';
                 return;
             }
-            requests.forEach((req, idx) => {
-                const div = document.createElement('div');
-                div.className = 'request-item';
-                div.innerHTML = `<span>${req.email}</span>`;
-                
-                const btnContainer = document.createElement('div');
-                
-                const acceptBtn = document.createElement('button');
-                acceptBtn.className = 'btn-success';
-                acceptBtn.innerText = 'موافقة';
-                acceptBtn.addEventListener('click', () => handleRequest(idx, true));
-                
-                const rejectBtn = document.createElement('button');
-                rejectBtn.className = 'btn-danger';
-                rejectBtn.innerText = 'رفض';
-                rejectBtn.style.marginRight = '5px';
-                rejectBtn.addEventListener('click', () => handleRequest(idx, false));
-                
-                btnContainer.appendChild(acceptBtn);
-                btnContainer.appendChild(rejectBtn);
-                div.appendChild(btnContainer);
-                rList.appendChild(div);
+            list.innerHTML = '';
+            reqs.forEach((req, index) => {
+                list.innerHTML += `
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-top:5px; font-size:13px;">
+                        <span>${req.email}</span>
+                        <div>
+                            <button class="btn-sec" onclick="handleReq(${index}, true)">موافقة</button>
+                            <button class="btn-del" onclick="handleReq(${index}, false)">رفض</button>
+                        </div>
+                    </div>`;
             });
         }
 
-        async function handleRequest(index, approved) {
-            let requests = currentGroupData.requests || [];
+        window.handleReq = async function(index, approved) {
+            let reqs = currentGroupData.requests || [];
             let members = currentGroupData.members || [];
-            const targetReq = requests.splice(index, 1)[0];
-
-            if(approved) {
-                members.push(targetReq.uid);
-            }
+            const target = reqs.splice(index, 1)[0];
+            if (approved) members.push(target.uid);
 
             try {
-                await updateDoc(doc(db, "groups", activeGroupId), { requests, members });
-                selectGroup(activeGroupId);
-                loadGroups();
-            } catch(e) {
-                alert('خطأ أثناء معالجة الطلب');
+                await updateDoc(doc(db, "groups", currentGroupId), { requests: reqs, members: members });
+                openGroup(currentGroupId);
+            } catch (e) {
+                alert('حدث خطأ');
             }
         }
 
+        // حفظ الملاحظات تلقائياً عند الكتابة
         document.getElementById('groupNotes').addEventListener('input', async () => {
-            if(!activeGroupId) return;
+            if (!currentGroupId) return;
             const notes = document.getElementById('groupNotes').value;
             try {
-                await updateDoc(doc(db, "groups", activeGroupId), { notes });
-            } catch(e) {
-                console.error(e);
-            }
+                await updateDoc(doc(db, "groups", currentGroupId), { notes });
+            } catch (e) {}
         });
 
+        // إضافة المهام
         document.getElementById('addTaskBtn').addEventListener('click', async () => {
             const title = document.getElementById('taskTitle').value.trim();
             const assignee = document.getElementById('taskAssignee').value.trim();
-            if(!title) return alert('أدخل عنوان المهمة');
+            if (!title) return alert('أدخل عنوان المهمة');
 
-            if(!currentGroupData.tasks) currentGroupData.tasks = [];
+            if (!currentGroupData.tasks) currentGroupData.tasks = [];
             currentGroupData.tasks.push({ title, assignee: assignee || 'غير محدد' });
 
             try {
-                await updateDoc(doc(db, "groups", activeGroupId), { tasks: currentGroupData.tasks });
+                await updateDoc(doc(db, "groups", currentGroupId), { tasks: currentGroupData.tasks });
                 document.getElementById('taskTitle').value = '';
                 document.getElementById('taskAssignee').value = '';
                 renderTasks();
-            } catch(e) {
-                alert('خطأ أثناء إضافة المهمة');
+            } catch (e) {
+                alert('فشل إضافة المهمة');
             }
         });
 
         function renderTasks() {
-            const tList = document.getElementById('tasksList');
-            tList.innerHTML = '';
+            const list = document.getElementById('tasksList');
             const tasks = currentGroupData.tasks || [];
-            if(tasks.length === 0) {
-                tList.innerHTML = '<p style="font-size:13px; color:#888; text-align:center; padding: 10px;">لا توجد مهام حالياً</p>';
+            if (tasks.length === 0) {
+                list.innerHTML = '<p style="font-size:13px; color:gray;">لا توجد مهام حالياً</p>';
                 return;
             }
+            list.innerHTML = '';
             tasks.forEach((t, i) => {
-                const li = document.createElement('li');
-                li.className = 'task-item';
-                li.innerHTML = `<span><strong>${t.title}</strong> (المسؤول: ${t.assignee})</span>`;
-                
-                const delBtn = document.createElement('button');
-                delBtn.className = 'btn-danger';
-                delBtn.innerText = 'حذف';
-                delBtn.addEventListener('click', () => {
-                    currentGroupData.tasks.splice(i, 1);
-                    updateDoc(doc(db, "groups", activeGroupId), { tasks: currentGroupData.tasks }).then(() => renderTasks());
-                });
-                
-                li.appendChild(delBtn);
-                tList.appendChild(li);
+                list.innerHTML += `
+                    <div class="list-item">
+                        <span><strong>${t.title}</strong> (المسؤول: ${t.assignee})</span>
+                        <button class="btn-del" onclick="deleteTask(${i})">حذف</button>
+                    </div>`;
             });
         }
 
-        document.getElementById('themeToggle').addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
+        window.deleteTask = async function(i) {
+            currentGroupData.tasks.splice(i, 1);
+            try {
+                await updateDoc(doc(db, "groups", currentGroupId), { tasks: currentGroupData.tasks });
+                renderTasks();
+            } catch (e) {
+                alert('فشل الحذف');
+            }
+        }
+
+        // تبديل المظهر
+        document.getElementById('themeBtn').addEventListener('click', () => {
+            document.body.classList.toggle('dark');
         });
     </script>
 </body>
