@@ -3,150 +3,554 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> ود الغول  - Futuristic Glow</title>
+    <title>Crew - إدارة المهام الجماعية</title>
     <style>
-        body, html {
+        :root {
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #1e293b;
+            --border: #e2e8f0;
+            --primary: #3b82f6;
+            --primary-hover: #2563eb;
+        }
+
+        body.dark-mode {
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+            --text: #f8fafc;
+            --border: #334155;
+            --primary: #60a5fa;
+            --primary-hover: #3b82f6;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: system-ui, -apple-system, sans-serif;
             margin: 0;
             padding: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            background-color: #000205; /* أسود أعمق لإبراز التوهج */
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background 0.2s, color 0.2s;
         }
 
-        /* خلفية الجزيئات */
-        #techCanvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border);
         }
 
-        /* حاوية النص المركزية */
         .container {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 2;
-            text-align: center;
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 0 15px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+
+        input, textarea {
             width: 100%;
+            padding: 10px 12px;
+            margin: 8px 0;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--card-bg);
+            color: var(--text);
+            box-sizing: border-box;
+            font-size: 14px;
         }
 
-        .neon-name {
-            font-size: 6rem;
-            font-weight: 900;
-            color: #fff;
-            letter-spacing: 8px;
-            text-transform: uppercase;
-            /* تأثير النيون الأساسي */
-            text-shadow: 0 0 10px #00d4ff, 0 0 20px #00d4ff;
-            /* استدعاء الرسوم المتحركة للتوهج البطيء */
-            animation: slowBreathe 4s ease-in-out infinite alternate;
-            user-select: none;
+        button {
+            padding: 10px 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 14px;
         }
 
-        /* أنيميشن التوهج البطيء (Breathing Effect) */
-        @keyframes slowBreathe {
-            0% {
-                text-shadow: 
-                    0 0 10px #00d4ff, 
-                    0 0 20px #00d4ff, 
-                    0 0 30px #00d4ff;
-                opacity: 0.8;
-                transform: scale(0.98);
-            }
-            100% {
-                text-shadow: 
-                    0 0 20px #00d4ff, 
-                    0 0 40px #00d4ff, 
-                    0 0 60px #00d4ff, 
-                    0 0 80px #008cff, 
-                    0 0 100px #008cff;
-                opacity: 1;
-                transform: scale(1.02); /* تمدد بسيط جداً مع التوهج */
-            }
+        .btn-primary { background: var(--primary); color: white; width: 100%; margin-top: 8px; }
+        .btn-primary:hover { background: var(--primary-hover); }
+
+        .btn-danger { background: #ef4444; color: white; padding: 5px 10px; font-size: 12px; }
+        .btn-text { background: transparent; color: var(--text); border: 1px solid var(--border); }
+        
+        .btn-google {
+            background: var(--card-bg);
+            color: var(--text);
+            border: 1px solid var(--border);
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+        .btn-google:hover { background: var(--bg); }
+
+        .auth-divider {
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+            line-height: 0.1em;
+            margin: 20px 0 15px 0;
+            font-size: 12px;
+            color: #888;
+        }
+        .auth-divider span {
+            background: var(--card-bg);
+            padding: 0 10px;
         }
 
-        @media (max-width: 600px) {
-            .neon-name { font-size: 2.5rem; letter-spacing: 3px; }
+        .row { display: flex; gap: 8px; }
+        .row input { margin: 0; }
+        .row button { width: auto; margin: 0; }
+
+        .divider { border: 0; border-top: 1px solid var(--border); margin: 20px 0; }
+        .hidden { display: none; }
+
+        .list { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+        .group-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 14px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
         }
+
+        .tasks-list { list-style: none; padding: 0; margin-top: 15px; }
+        .task-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .modal {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+        .modal-content {
+            width: 90%;
+            max-width: 400px;
+        }
+        .requests-box {
+            background: var(--bg);
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            margin-bottom: 15px;
+        }
+        .request-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 14px;
+        }
+        .btn-success { background: #10b981; color: white; padding: 6px 12px; font-size: 12px; border: none; border-radius: 6px; cursor: pointer; }
     </style>
 </head>
 <body>
 
-    <canvas id="techCanvas"></canvas>
+    <header class="header">
+        <h1>Crew</h1>
+        <div>
+            <button id="themeToggle" class="btn-text">🌙 الوضع</button>
+            <span id="userDisplay" style="margin-right: 10px; font-size: 14px;"></span>
+            <button id="logoutBtn" class="btn-danger hidden" style="padding: 4px 8px; font-size: 12px; margin-right: 5px;">خروج</button>
+        </div>
+    </header>
 
-    <div class="container">
-        <h1 class="neon-name"> مرحبا دكتور احمد مصطفى خضر 
-            يا ربت ترد علي في الواتساب لانك الان متصل وماسك التلفون وشكرا 
-            مع تحياتي المدير 
-           .</h1>
+    <main class="container">
+        
+        <!-- شاشة تسجيل الدخول -->
+        <section id="authSection" class="card">
+            <h2>تسجيل الدخول</h2>
+            <button id="googleLoginBtn" class="btn-google">
+                <svg width="18" height="18" viewBox="0 0 24 24" style="vertical-align: middle;"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.13 0-5.78-2.11-6.73-4.96H1.18v3.15C3.17 21.34 7.23 24 12 24z"/><path fill="#FBBC05" d="M5.27 14.24c-.25-.72-.38-1.49-.38-2.24s.13-1.52.38-2.24V6.6H1.18C.43 8.13 0 9.87 0 12s.43 3.87 1.18 5.4l4.09-3.16z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.23 0 3.17 2.66 1.18 6.6l4.09 3.15c.95-2.85 3.6-4.96 6.73-4.96z"/></svg>
+                التسجيل بواسطة Google
+            </button>
+            <div class="auth-divider"><span>أو بالبريد وكلمة المرور</span></div>
+            <input type="email" id="emailInput" placeholder="البريد الإلكتروني...">
+            <input type="password" id="passInput" placeholder="كلمة المرور...">
+            <button id="emailLoginBtn" class="btn-primary">دخول / إنشاء حساب</button>
+        </section>
+
+        <!-- لوحة التحكم الرئيسية -->
+        <section id="appSection" class="card hidden">
+            
+            <button id="openCreateModalBtn" class="btn-primary">➕ إنشاء مجموعة جديدة</button>
+
+            <hr class="divider">
+
+            <h3>مجموعاتي</h3>
+            <div id="groupsList" class="list"></div>
+
+            <hr class="divider">
+
+            <h3>المجموعات المتاحة للانضمام</h3>
+            <div id="allGroupsList" class="list"></div>
+
+            <div id="activeGroupContainer" class="hidden">
+                <hr class="divider">
+                <div class="group-info-header">
+                    <h3 id="activeGroupTitle">اسم المجموعة</h3>
+                </div>
+
+                <div id="requestsSection" class="hidden requests-box">
+                    <h4>طلبات الانضمام المعلقة</h4>
+                    <div id="requestsList"></div>
+                </div>
+
+                <div class="notes-box">
+                    <h4>ملاحظات عامة</h4>
+                    <textarea id="groupNotes" placeholder="اكتب ملاحظات الجروب هنا..."></textarea>
+                </div>
+
+                <div class="row" style="margin-top: 15px;">
+                    <input type="text" id="taskTitle" placeholder="اسم المهمة...">
+                    <input type="text" id="taskAssignee" placeholder="مسندة إلى...">
+                    <button id="addTaskBtn" class="btn-primary">إضافة مهمة</button>
+                </div>
+
+                <ul id="tasksList" class="tasks-list"></ul>
+            </div>
+
+        </section>
+    </main>
+
+    <!-- مودال إنشاء مجموعة -->
+    <div id="createModal" class="modal hidden">
+        <div class="modal-content card">
+            <h3>إنشاء مجموعة جديدة</h3>
+            <input type="text" id="newGroupName" placeholder="اسم المجموعة...">
+            <div class="row" style="margin-top: 10px;">
+                <button id="confirmCreateBtn" class="btn-primary">تأكيد الإنشاء</button>
+                <button id="closeCreateModalBtn" class="btn-danger">إلغاء</button>
+            </div>
+        </div>
     </div>
 
-    <script>
-        // كود الخلفية التكنولوجية (Particles)
-        const canvas = document.getElementById('techCanvas');
-        const ctx = canvas.getContext('2d');
-        let particlesArray;
+    <!-- كود المنطق وربط Firebase -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getFirestore, collection, getDocs, doc, updateDoc, getDoc, addDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        const firebaseConfig = {
+            apiKey: "AIzaSyBMM9yXT-LJfWPTv0AD2iD2rC2rnenYYik",
+            authDomain: "crew-397b4.firebaseapp.com",
+            projectId: "crew-397b4",
+            storageBucket: "crew-397b4.firebasestorage.app",
+            messagingSenderId: "402724763653",
+            appId: "1:402724763653:web:bbe671c78ad9b77b2c846c",
+            measurementId: "G-DHSN624VNK"
+        };
 
-        class Particle {
-            constructor(x, y, directionX, directionY, size) {
-                this.x = x;
-                this.y = y;
-                this.directionX = directionX;
-                this.directionY = directionY;
-                this.size = size;
-            }
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
-                ctx.fillStyle = 'rgba(0, 212, 255, 0.5)';
-                ctx.fill();
-            }
-            update() {
-                if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
-                if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
-                this.x += this.directionX;
-                this.y += this.directionY;
-                this.draw();
-            }
-        }
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const googleProvider = new GoogleAuthProvider();
 
-        function init() {
-            particlesArray = [];
-            let numberOfParticles = (canvas.height * canvas.width) / 10000;
-            for (let i = 0; i < numberOfParticles; i++) {
-                let size = Math.random() * 2;
-                let x = Math.random() * innerWidth;
-                let y = Math.random() * innerHeight;
-                let directionX = (Math.random() * 0.5) - 0.25;
-                let directionY = (Math.random() * 0.5) - 0.25;
-                particlesArray.push(new Particle(x, y, directionX, directionY, size));
-            }
-        }
+        let currentUser = null;
+        let activeGroupId = null;
+        let currentGroupData = null;
 
-        function animate() {
-            requestAnimationFrame(animate);
-            ctx.clearRect(0, 0, innerWidth, innerHeight);
-            for (let i = 0; i < particlesArray.length; i++) {
-                particlesArray[i].update();
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                currentUser = user;
+                document.getElementById('authSection').classList.add('hidden');
+                document.getElementById('appSection').classList.remove('hidden');
+                document.getElementById('userDisplay').innerText = user.displayName || user.email;
+                document.getElementById('logoutBtn').classList.remove('hidden');
+                loadGroups();
+            } else {
+                currentUser = null;
+                document.getElementById('authSection').classList.remove('hidden');
+                document.getElementById('appSection').classList.add('hidden');
+                document.getElementById('logoutBtn').classList.add('hidden');
+                document.getElementById('activeGroupContainer').classList.add('hidden');
             }
-        }
-
-        window.addEventListener('resize', () => {
-            canvas.width = innerWidth; canvas.height = innerHeight;
-            init();
         });
 
-        init();
-        animate();
+        document.getElementById('googleLoginBtn').addEventListener('click', async () => {
+            try { await signInWithPopup(auth, googleProvider); } catch(e) { alert('خطأ في تسجيل الدخول عبر Google'); }
+        });
+
+        document.getElementById('emailLoginBtn').addEventListener('click', async () => {
+            const email = document.getElementById('emailInput').value.trim();
+            const pass = document.getElementById('passInput').value.trim();
+            if(!email || !pass) return alert('الرجاء إدخال البريد وكلمة المرور');
+            try { 
+                await signInWithEmailAndPassword(auth, email, pass); 
+            } catch { 
+                try {
+                    await createUserWithEmailAndPassword(auth, email, pass);
+                } catch(err) {
+                    alert('خطأ: ' + err.message);
+                }
+            }
+        });
+
+        document.getElementById('logoutBtn').addEventListener('click', () => signOut(auth));
+
+        document.getElementById('openCreateModalBtn').addEventListener('click', () => {
+            document.getElementById('createModal').classList.remove('hidden');
+        });
+
+        document.getElementById('closeCreateModalBtn').addEventListener('click', () => {
+            document.getElementById('createModal').classList.add('hidden');
+            document.getElementById('newGroupName').value = '';
+        });
+
+        document.getElementById('confirmCreateBtn').addEventListener('click', async () => {
+            const name = document.getElementById('newGroupName').value.trim();
+            if(!name) return alert('الرجاء إدخال اسم المجموعة');
+
+            try {
+                await addDoc(collection(db, "groups"), {
+                    name,
+                    owner: currentUser.uid,
+                    members: [currentUser.uid],
+                    requests: [],
+                    notes: '',
+                    tasks: []
+                });
+                document.getElementById('createModal').classList.add('hidden');
+                document.getElementById('newGroupName').value = '';
+                loadGroups();
+            } catch(e) {
+                alert('خطأ أثناء الإنشاء');
+            }
+        });
+
+        async function loadGroups() {
+            const myList = document.getElementById('groupsList');
+            const allList = document.getElementById('allGroupsList');
+            myList.innerHTML = 'جاري التحميل...';
+            allList.innerHTML = 'جاري التحميل...';
+
+            try {
+                const querySnapshot = await getDocs(collection(db, "groups"));
+                myList.innerHTML = '';
+                allList.innerHTML = '';
+                let hasMyGroups = false;
+                let hasOtherGroups = false;
+
+                querySnapshot.forEach((docSnap) => {
+                    const g = docSnap.data();
+                    const id = docSnap.id;
+                    const members = g.members || [];
+                    const requests = g.requests || [];
+
+                    if (members.includes(currentUser.uid)) {
+                        hasMyGroups = true;
+                        const item = document.createElement('div');
+                        item.className = 'group-item';
+                        item.innerHTML = `<span>📁 ${g.name}</span>`;
+                        const btn = document.createElement('button');
+                        btn.className = 'btn-success';
+                        btn.innerText = 'فتح';
+                        btn.addEventListener('click', () => selectGroup(id));
+                        item.appendChild(btn);
+                        myList.appendChild(item);
+                    } else {
+                        hasOtherGroups = true;
+                        const item = document.createElement('div');
+                        item.className = 'group-item';
+                        item.innerHTML = `<span>📁 ${g.name}</span>`;
+                        
+                        const alreadyRequested = requests.some(r => r.uid === currentUser.uid);
+                        const btn = document.createElement('button');
+                        if (alreadyRequested) {
+                            btn.className = 'btn-text';
+                            btn.innerText = 'بانتظار الموافقة';
+                            btn.disabled = true;
+                        } else {
+                            btn.className = 'btn-success';
+                            btn.innerText = 'طلب انضمام';
+                            btn.addEventListener('click', () => requestToJoin(id, g));
+                        }
+                        item.appendChild(btn);
+                        allList.appendChild(item);
+                    }
+                });
+
+                if(!hasMyGroups) {
+                    myList.innerHTML = '<p style="font-size:13px; color:#888;">ليس لديك أي مجموعات حالياً.</p>';
+                }
+                if(!hasOtherGroups) {
+                    allList.innerHTML = '<p style="font-size:13px; color:#888;">لا توجد مجموعات أخرى متاحة.</p>';
+                }
+            } catch(e) {
+                myList.innerHTML = 'فشل التحميل';
+                allList.innerHTML = 'فشل التحميل';
+            }
+        }
+
+        async function requestToJoin(groupId, groupData) {
+            try {
+                let requests = groupData.requests || [];
+                if(requests.some(r => r.uid === currentUser.uid)) return;
+
+                requests.push({ uid: currentUser.uid, email: currentUser.email || currentUser.displayName || 'مستخدم' });
+                await updateDoc(doc(db, "groups", groupId), { requests });
+                alert('تم إرسال طلب الانضمام بنجاح');
+                loadGroups();
+            } catch(e) {
+                alert('حدث خطأ أثناء إرسال الطلب');
+            }
+        }
+
+        async function selectGroup(id) {
+            activeGroupId = id;
+            try {
+                const docRef = doc(db, "groups", id);
+                const docSnap = await getDoc(docRef);
+                if(docSnap.exists()) {
+                    currentGroupData = docSnap.data();
+                    document.getElementById('activeGroupContainer').classList.remove('hidden');
+                    document.getElementById('activeGroupTitle').innerText = `المجموعة: ${currentGroupData.name}`;
+                    document.getElementById('groupNotes').value = currentGroupData.notes || '';
+                    
+                    if(currentGroupData.owner === currentUser.uid) {
+                        document.getElementById('requestsSection').classList.remove('hidden');
+                        renderRequests();
+                    } else {
+                        document.getElementById('requestsSection').classList.add('hidden');
+                    }
+                    renderTasks();
+                }
+            } catch(e) {
+                alert('خطأ في تحميل تفاصيل المجموعة');
+            }
+        }
+
+        function renderRequests() {
+            const rList = document.getElementById('requestsList');
+            rList.innerHTML = '';
+            const requests = currentGroupData.requests || [];
+            if(requests.length === 0) {
+                rList.innerHTML = '<p style="font-size:13px; color:#888;">لا توجد طلبات معلقة</p>';
+                return;
+            }
+            requests.forEach((req, idx) => {
+                const div = document.createElement('div');
+                div.className = 'request-item';
+                div.innerHTML = `<span>${req.email}</span>`;
+                
+                const btnContainer = document.createElement('div');
+                
+                const acceptBtn = document.createElement('button');
+                acceptBtn.className = 'btn-success';
+                acceptBtn.innerText = 'موافقة';
+                acceptBtn.addEventListener('click', () => handleRequest(idx, true));
+                
+                const rejectBtn = document.createElement('button');
+                rejectBtn.className = 'btn-danger';
+                rejectBtn.innerText = 'رفض';
+                rejectBtn.style.marginRight = '5px';
+                rejectBtn.addEventListener('click', () => handleRequest(idx, false));
+                
+                btnContainer.appendChild(acceptBtn);
+                btnContainer.appendChild(rejectBtn);
+                div.appendChild(btnContainer);
+                rList.appendChild(div);
+            });
+        }
+
+        async function handleRequest(index, approved) {
+            let requests = currentGroupData.requests || [];
+            let members = currentGroupData.members || [];
+            const targetReq = requests.splice(index, 1)[0];
+
+            if(approved) {
+                members.push(targetReq.uid);
+            }
+
+            try {
+                await updateDoc(doc(db, "groups", activeGroupId), { requests, members });
+                selectGroup(activeGroupId);
+                loadGroups();
+            } catch(e) {
+                alert('خطأ أثناء معالجة الطلب');
+            }
+        }
+
+        document.getElementById('groupNotes').addEventListener('input', async () => {
+            if(!activeGroupId) return;
+            const notes = document.getElementById('groupNotes').value;
+            try {
+                await updateDoc(doc(db, "groups", activeGroupId), { notes });
+            } catch(e) {
+                console.error(e);
+            }
+        });
+
+        document.getElementById('addTaskBtn').addEventListener('click', async () => {
+            const title = document.getElementById('taskTitle').value.trim();
+            const assignee = document.getElementById('taskAssignee').value.trim();
+            if(!title) return alert('أدخل عنوان المهمة');
+
+            if(!currentGroupData.tasks) currentGroupData.tasks = [];
+            currentGroupData.tasks.push({ title, assignee: assignee || 'غير محدد' });
+
+            try {
+                await updateDoc(doc(db, "groups", activeGroupId), { tasks: currentGroupData.tasks });
+                document.getElementById('taskTitle').value = '';
+                document.getElementById('taskAssignee').value = '';
+                renderTasks();
+            } catch(e) {
+                alert('خطأ أثناء إضافة المهمة');
+            }
+        });
+
+        function renderTasks() {
+            const tList = document.getElementById('tasksList');
+            tList.innerHTML = '';
+            const tasks = currentGroupData.tasks || [];
+            if(tasks.length === 0) {
+                tList.innerHTML = '<p style="font-size:13px; color:#888; text-align:center; padding: 10px;">لا توجد مهام حالياً</p>';
+                return;
+            }
+            tasks.forEach((t, i) => {
+                const li = document.createElement('li');
+                li.className = 'task-item';
+                li.innerHTML = `<span><strong>${t.title}</strong> (المسؤول: ${t.assignee})</span>`;
+                
+                const delBtn = document.createElement('button');
+                delBtn.className = 'btn-danger';
+                delBtn.innerText = 'حذف';
+                delBtn.addEventListener('click', () => {
+                    currentGroupData.tasks.splice(i, 1);
+                    updateDoc(doc(db, "groups", activeGroupId), { tasks: currentGroupData.tasks }).then(() => renderTasks());
+                });
+                
+                li.appendChild(delBtn);
+                tList.appendChild(li);
+            });
+        }
+
+        document.getElementById('themeToggle').addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+        });
     </script>
 </body>
 </html>
